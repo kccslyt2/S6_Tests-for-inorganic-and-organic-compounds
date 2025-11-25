@@ -278,14 +278,18 @@
                         if (cId === 'Fe2+') return 'Dirty green precipitate forms.';
                         if (cId === 'Fe3+') return 'Reddish-brown precipitate forms.';
                         if (['Ca2+', 'Mg2+', 'Al3+', 'Zn2+'].includes(cId)) return 'White precipitate forms.';
-                        if (cId === 'NH4+') return 'No precipitate. On warming, a pungent gas is evolved which turns wet pH paper blue.';
+                        if (cId === 'NH4+') return 'No visible precipitate.';
                         return 'No visible precipitate.';
                     })()
                 },
                 {
                     test: 'Add excess NaOH(aq)',
-                    obs: ['Zn2+', 'Al3+'].includes(cId) ? 'The white precipitate dissolves to form a colorless solution.' : 
-                        (['Ca2+', 'Mg2+', 'Cu2+', 'Fe2+', 'Fe3+'].includes(cId) ? 'The precipitate remains insoluble.' : 'N/A.')
+                    obs: (() => {
+                        if (['Zn2+', 'Al3+'].includes(cId)) return 'The white precipitate dissolves to form a colorless solution.';
+                        if (['Ca2+', 'Mg2+', 'Cu2+', 'Fe2+', 'Fe3+'].includes(cId)) return 'The precipitate remains insoluble.';
+                        if (cId === 'NH4+') return 'No precipitate forms. On warming, a pungent gas is evolved which turns wet pH paper blue.';
+                        return 'No precipitate forms.';
+                    })()
                 },
                 { 
                     test: 'Add dilute NH₃(aq)', 
